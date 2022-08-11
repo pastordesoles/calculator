@@ -9,6 +9,7 @@ const clearScreen = () => {
   num1 = undefined;
   num2 = undefined;
   total = undefined
+  operand = undefined
 };
 
 const display = (value) => {
@@ -30,6 +31,7 @@ const getNumberTwo = () => {
 const minus = () => {
     if (total !== undefined) {
         num1 = total
+        operand = "-"
         document.getElementById("result").value = ""
         getNumberTwo()
     }
@@ -39,8 +41,9 @@ const minus = () => {
 };
 
 const plus = () => {
-  if (total !== undefined) {
+  if (total !== undefined && operand === "=") {
     num1 = total
+    operand = "+"
     document.getElementById("result").value = ""
     getNumberTwo();
   }
@@ -52,6 +55,7 @@ const plus = () => {
 const mult = () => {
     if (total !== undefined) {
         num1 = total
+        operand = "*"
         document.getElementById("result").value = ""
         getNumberTwo()
     }
@@ -63,6 +67,7 @@ const mult = () => {
 const div = () => {
     if (total !== undefined) {
         num1 = total
+        operand = "/"
         document.getElementById("result").value = ""
         getNumberTwo()
     }
@@ -87,58 +92,69 @@ const operations = () => {
       document.getElementById("result").value = "";
       total = num1 + num2;
       display(total);
+      operand = "="
       break;
     case "-":
       document.getElementById("result").value = "";
       total = num1 - num2;
       display(total);
+      operand = "="
       num1 = total;
       break;
     case "*":
       document.getElementById("result").value = "";
       total = num1 * num2;
       display(total);
+      operand = "="
       num1 = total;
       break;
     case "/":
       document.getElementById("result").value = "";
       total = num1 / num2;
       display(total);
+      operand = "="
       num1 = total;
       break;
   }
 };
 
+const numberClick = (number) => {
+    if (operand === "=") {
+        clearScreen()
+    }
+    display(number);
+}
+
 document.addEventListener("keydown", (event) => {
     if (event.key === "1") {
-      display("1");
+        numberClick('1');
     }
     if (event.key === "2") {
-      display("2");
+        numberClick('2');
     }
     if (event.key === "3") {
-      display("3");
+        numberClick('3');
     }
     if (event.key === "4") {
-      display("4");
+        numberClick('4');
     }
     if (event.key === "5") {
-      display("5");
+        numberClick('5');
     }
     if (event.key === "6") {
-      display("6");
+        numberClick('6');
     }
     if (event.key === "7") {
-      display("7");
+        numberClick('7');
     }
     if (event.key === "8") {
-      display("8");
+        numberClick('8');
     }
     if (event.key === "9") {
-      display("9");
+        numberClick('9');
     }
     if (event.key === "0") {
-      display("0");
+        numberClick('0');
     }
     if (event.key === ".") {
       addPoint();
